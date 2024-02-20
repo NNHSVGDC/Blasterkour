@@ -424,6 +424,7 @@ MonoBehaviour:
   pickupRange: 10
   moveForce: 10
   holdParent: {fileID: 1421409763}
+  throwForce: 1000
 --- !u!1 &1067200073
 GameObject:
   m_ObjectHideFlags: 0
@@ -774,7 +775,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bc11a3adcee3c245bebbac4a1229e11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivity: 1500
+  mouseSensitivity: 300
   playerBody: {fileID: 968309792}
 --- !u!114 &1374363308
 MonoBehaviour:

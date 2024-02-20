@@ -5,6 +5,7 @@ public class Pickup : MonoBehaviour
     public float pickupRange = 10f;
     public float moveForce = 250f;
     public Transform holdParent; // The parent transform where picked objects should be held.
+    public float throwForce = 500f; // Force to apply when throwing the object.
 
     private GameObject heldObj;
 
@@ -34,6 +35,12 @@ public class Pickup : MonoBehaviour
         if(heldObj != null)
         {
             MoveObject();
+
+            // Check for right mouse button click to throw the object
+            if(Input.GetButtonDown("Fire2")) // Typically the right mouse button.
+            {
+                ThrowObject();
+            }
         }
     }
 
@@ -69,6 +76,21 @@ public class Pickup : MonoBehaviour
         {
             Vector3 moveDirection = (holdParent.position - heldObj.transform.position);
             heldObj.GetComponent<Rigidbody>().AddForce(moveDirection * moveForce);
+        }
+    }
+
+    void ThrowObject()
+    {
+        if(heldObj.GetComponent<Rigidbody>())
+        {
+            Rigidbody objRb = heldObj.GetComponent<Rigidbody>();
+            objRb.useGravity = true;
+            objRb.drag = 1;
+
+            heldObj.transform.parent = null;
+            objRb.AddForce(holdParent.forward * throwForce); // Apply force in the forward direction of the holdParent
+
+            heldObj = null; // Clear the reference to the held object after throwing it.
         }
     }
 }
